@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "d377d358-be4e-47b4-8250-2b9f687b9158",
+		"name": "bpmn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25806807"
+	},
+	"item": [
+		{
+			"name": "defintion",
+			"item": [
+				{
+					"name": "service",
+					"item": [
+						{
+							"name": "get by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/serviceDefinitions/{{serviceId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serviceDefinitions",
+										"{{serviceId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by tenantId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/serviceDefinitions/?tenantId=1&page=0&size=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serviceDefinitions",
+										""
+									],
+									"query": [
+										{
+											"key": "tenantId",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create service definition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body=pm.response.json();",
+											"pm.collectionVariables.set(\"serviceId\",body.id);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"ff\",\n    \"description\":\"voiture contract\",\n    \"tenantId\":2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/serviceDefinitions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"serviceDefinitions"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "process",
+					"item": [
+						{
+							"name": "get by service id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/processDefinitions?serviceDefinitionId=1&page=0&size=10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"processDefinitions"
+									],
+									"query": [
+										{
+											"key": "serviceDefinitionId",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/processDefinitions/{{processId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"processDefinitions",
+										"{{processId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create a process",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body=pm.response.json();",
+											"pm.collectionVariables.set(\"processId\",body.id);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/tibo/mt_bpm/src/main/resources/process/test.bpmn"
+										},
+										{
+											"key": "name",
+											"value": "name",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "blbla",
+											"type": "text"
+										},
+										{
+											"key": "fileName",
+											"value": "mail370",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/processDefinitions/{{serviceId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"processDefinitions",
+										"{{serviceId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by tenantID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/processDefinitions?tenantId=1&page=0&size=10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"processDefinitions"
+									],
+									"query": [
+										{
+											"key": "tenantId",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "runtime",
+			"item": [
+				{
+					"name": "execution",
+					"item": [
+						{
+							"name": "start Execution",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const body=pm.response.json();",
+											"pm.collectionVariables.set(\"executionId\",body.id);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"contractorId\":1,\n    \"beneficiaryId\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/runtime/execution/{{processId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"runtime",
+										"execution",
+										"{{processId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "next step",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/runtime/execution/{{executionId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"runtime",
+										"execution",
+										"{{executionId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "next step",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/runtime/execution/nextStep/{{executionId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"runtime",
+										"execution",
+										"nextStep",
+										"{{executionId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Contract",
+			"item": [
+				{
+					"name": "get by runtime execution",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/contract/{{executionId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contract",
+								"{{executionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/contract/{{executionId}}/approve",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contract",
+								"{{executionId}}",
+								"approve"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reject",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/contract/{{executionId}}/reject",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contract",
+								"{{executionId}}",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:9000",
+			"type": "string"
+		},
+		{
+			"key": "serviceId",
+			"value": ""
+		},
+		{
+			"key": "processId",
+			"value": ""
+		},
+		{
+			"key": "executionId",
+			"value": ""
+		}
+	]
+}
